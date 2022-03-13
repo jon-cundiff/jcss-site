@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             models.Theme.belongsTo(models.User);
+            models.Theme.hasMany(models.Favorite, {
+                as: "favorites",
+                foreignKey: "theme_id",
+                onDelete: "CASCADE",
+            });
         }
     }
     Theme.init(
