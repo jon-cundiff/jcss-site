@@ -13,7 +13,6 @@ const Header = () => {
         },
     ];
 
-    console.log(user);
     const rightChildren = user
         ? [
               {
