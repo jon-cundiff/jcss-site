@@ -47,7 +47,7 @@ passport.deserializeUser(async (id, done) => {
 router.get("/github", passport.authenticate("github", { scope: ["user"] }));
 router.get("/github/callback", passport.authenticate("github"), (req, res) => {
     if (!req.user) {
-        res.redirect(`${CLIENT_BASE}/loginstatus?failure=true`);
+        res.redirect(`${CLIENT_BASE}/login?failure=true`);
     } else {
         const token = jwt.sign(
             {
@@ -56,7 +56,9 @@ router.get("/github/callback", passport.authenticate("github"), (req, res) => {
             },
             process.env.JWT
         );
-        return res.json({ token, username: req.user.username });
+        res.redirect(
+            `${CLIENT_BASE}/login?token=${token}&username=${req.user.username}`
+        );
     }
 });
 

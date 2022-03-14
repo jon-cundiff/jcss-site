@@ -3,7 +3,7 @@ import { Button, Row, Column } from "@jon-cundiff/jcss-components";
 
 const HomePage = () => {
     return (
-        <div>
+        <Column className="px-5 mx-5">
             <Row fill justify="between">
                 <Column>
                     <Button
@@ -27,7 +27,7 @@ const HomePage = () => {
                 </Column>
             </Row>
             <Button>Hi</Button>
-        </div>
+        </Column>
     );
 };
 

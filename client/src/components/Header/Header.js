@@ -1,19 +1,64 @@
 import React from "react";
-import { Header as JCSSHeader } from "@jon-cundiff/jcss-components";
+import { Header as JCSSHeader, Button } from "@jon-cundiff/jcss-components";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../store/actions/actionCreators";
 
 const Header = () => {
+    const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
     const leftChildren = [
         {
-            text: "Buttons",
+            inner: "Buttons",
             link: "/button",
         },
     ];
+
+    console.log(user);
+    const rightChildren = user
+        ? [
+              {
+                  inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
+                  external: true,
+                  link: "/builder",
+              },
+              {
+                  inner: user.username,
+              },
+              {
+                  inner: (
+                      <Button
+                          styleType="danger"
+                          onClick={() => dispatch(logoutUser())}
+                      >
+                          Logout
+                      </Button>
+                  ),
+                  link: "/",
+              },
+          ]
+        : [
+              {
+                  inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
+                  external: true,
+                  link: "/builder",
+              },
+              {
+                  inner: (
+                      <Button styleType="info" faIcon="fab fa-github">
+                          Login
+                      </Button>
+                  ),
+                  external: true,
+                  link: `${process.env.REACT_APP_BASE_URL}/auth/github`,
+              },
+          ];
 
     return (
         <JCSSHeader
             styleType="secondary"
             logoText="JCSS"
             leftChildren={leftChildren}
+            rightChildren={rightChildren}
         />
     );
 };
