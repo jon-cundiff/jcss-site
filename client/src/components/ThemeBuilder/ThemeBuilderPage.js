@@ -1,23 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { Column, MobileRow } from "@jon-cundiff/jcss-components";
-import { defaultTheme } from "./defaultTheme";
+import { defaultTheme } from "../../common/defaultTheme";
 import ColorPicker from "./ColorPicker";
+import { makeThemeStyles } from "../../common/makeThemeStyles";
 
 const ThemeBuilderPage = () => {
     const [theme, setTheme] = useState(defaultTheme);
-    const colorKeys = ["primary", "secondary", "info", "success", "danger"];
 
-    const cssVarStyles = {};
-    for (let colorKey of colorKeys) {
-        for (let [modKey, val] of Object.entries(theme[colorKey])) {
-            let keyName = `--color-${colorKey}`;
-            if (modKey !== "main") {
-                keyName += `-${modKey}`;
-            }
-            cssVarStyles[keyName] = val;
-        }
-    }
+    const cssVarStyles = makeThemeStyles(theme);
 
     const onColorChange = (key, colorObj) => {
         setTheme({
