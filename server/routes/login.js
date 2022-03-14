@@ -56,7 +56,9 @@ router.get("/github/callback", passport.authenticate("github"), (req, res) => {
             },
             process.env.JWT
         );
-        return res.json({ token, username: req.user.username });
+        res.redirect(
+            `${CLIENT_BASE}/loginstatus?token=${token}&username=${req.user.username}`
+        );
     }
 });
 

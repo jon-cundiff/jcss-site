@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@jon-cundiff/jcss": "^0.0.8",
-        "@jon-cundiff/jcss-components": "^0.1.2",
+        "@jon-cundiff/jcss-components": "^0.1.3",
         "@testing-library/jest-dom": "^5.16.2",
         "@testing-library/react": "^12.1.3",
         "@testing-library/user-event": "^13.5.0",
