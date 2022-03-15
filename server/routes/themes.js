@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
             order: [["createdAt", "DESC"]],
         });
 
-        res.json(themes);
+        res.status(201).json(themes);
     } catch {
         res.status(400).json({
             success: false,

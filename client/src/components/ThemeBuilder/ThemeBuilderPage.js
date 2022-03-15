@@ -4,7 +4,7 @@ import ColorPicker from "./ColorPicker";
 import { makeThemeStyles } from "../../common/makeThemeStyles";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setSiteTheme } from "../../store/actions/actionCreators";
+import { postTheme, setSiteTheme } from "../../store/actions/actionCreators";
 
 const ThemeBuilderPage = () => {
     const dispatch = useDispatch();
@@ -13,6 +13,10 @@ const ThemeBuilderPage = () => {
 
     const handleThemeUpdate = () => {
         dispatch(setSiteTheme(theme));
+    };
+
+    const handleThemeSave = () => {
+        dispatch(postTheme(theme));
     };
 
     return (
@@ -38,6 +42,7 @@ const ThemeBuilderPage = () => {
             <Button styleType="primary" onClick={handleThemeUpdate}>
                 Preview on Site
             </Button>
+            <Button styleType="info" onClick={handleThemeSave}></Button>
         </Column>
     );
 };
