@@ -33,6 +33,7 @@ router.get("/profile", validateJwt, async (req, res) => {
     try {
         const themes = await models.Theme.findAll({
             where: { user_id: req.userId },
+            order: [["createdAt", "DESC"]],
         });
 
         res.json({
