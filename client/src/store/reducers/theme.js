@@ -19,7 +19,20 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action.types) {
+    switch (action.type) {
+        case actionTypes.SET_SITE_THEME:
+            return {
+                ...state,
+                site: action.payload,
+            };
+        case actionTypes.SET_USER_THEME:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    [action.payload.key]: action.payload.colors,
+                },
+            };
         default:
             return state;
     }

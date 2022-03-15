@@ -15,3 +15,17 @@ export const logoutUser = () => {
         type: actionTypes.LOGOUT_USER,
     };
 };
+
+export const setSiteTheme = (theme) => {
+    return {
+        type: actionTypes.SET_SITE_THEME,
+        payload: theme,
+    };
+};
+
+export const setUserTheme = (key, colors) => {
+    return {
+        type: actionTypes.SET_USER_THEME,
+        payload: { key, colors },
+    };
+};

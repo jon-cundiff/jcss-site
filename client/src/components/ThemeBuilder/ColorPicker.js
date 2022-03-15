@@ -3,8 +3,15 @@ import { HuePicker } from "react-color";
 import { Card } from "@jon-cundiff/jcss-components";
 import chroma from "chroma-js";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUserTheme } from "../../store/actions/actionCreators";
+import { useSelector } from "react-redux";
 
-const ColorPicker = ({ label, colorMain, onChange }) => {
+const ColorPicker = ({ label }) => {
+    const dispatch = useDispatch();
+    const colorMain = useSelector(
+        (state) => state.theme.user[label.toLowerCase()].main
+    );
     const cardRef = useRef(null);
     const [width, setWidth] = useState(100);
 
@@ -31,12 +38,12 @@ const ColorPicker = ({ label, colorMain, onChange }) => {
         }
         const colorSwatch = chroma.scale(["white", main, "black"]).colors(21);
         const colorObj = {
-            main: main,
+            main: main.hex(),
             lightest: colorSwatch[4],
             lighter: colorSwatch[8],
             dark: colorSwatch[13],
         };
-        onChange(label.toLowerCase(), colorObj);
+        dispatch(setUserTheme(label.toLowerCase(), colorObj));
     };
 
     return (

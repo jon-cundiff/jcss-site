@@ -1,54 +1,44 @@
 import React from "react";
-import { useState } from "react";
-import { Column, MobileRow } from "@jon-cundiff/jcss-components";
-import { defaultTheme } from "../../common/defaultTheme";
+import { Column, MobileRow, Button } from "@jon-cundiff/jcss-components";
 import ColorPicker from "./ColorPicker";
 import { makeThemeStyles } from "../../common/makeThemeStyles";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setSiteTheme } from "../../store/actions/actionCreators";
 
 const ThemeBuilderPage = () => {
-    const [theme, setTheme] = useState(defaultTheme);
-
+    const dispatch = useDispatch();
+    const theme = useSelector((state) => state.theme.user);
     const cssVarStyles = makeThemeStyles(theme);
 
-    const onColorChange = (key, colorObj) => {
-        setTheme({
-            ...theme,
-            [key]: colorObj,
-        });
+    const handleThemeUpdate = () => {
+        dispatch(setSiteTheme(theme));
     };
 
     return (
-        <div style={cssVarStyles} className="mx-5">
-            <Column>
+        <Column>
+            <div style={cssVarStyles} className="mx-5">
                 <MobileRow wrap>
                     <ColorPicker
                         label="Primary"
                         colorMain={theme.primary.main}
-                        onChange={onColorChange}
                     />
                     <ColorPicker
                         label="Secondary"
                         colorMain={theme.secondary.main}
-                        onChange={onColorChange}
                     />
-                    <ColorPicker
-                        label="Info"
-                        colorMain={theme.info.main}
-                        onChange={onColorChange}
-                    />
+                    <ColorPicker label="Info" colorMain={theme.info.main} />
                     <ColorPicker
                         label="Success"
                         colorMain={theme.success.main}
-                        onChange={onColorChange}
                     />
-                    <ColorPicker
-                        label="Danger"
-                        colorMain={theme.danger.main}
-                        onChange={onColorChange}
-                    />
+                    <ColorPicker label="Danger" colorMain={theme.danger.main} />
                 </MobileRow>
-            </Column>
-        </div>
+            </div>
+            <Button styleType="primary" onClick={handleThemeUpdate}>
+                Preview on Site
+            </Button>
+        </Column>
     );
 };
 

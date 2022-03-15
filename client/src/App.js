@@ -1,5 +1,6 @@
-import { JCSSApp } from "@jon-cundiff/jcss-components";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { makeThemeStyles } from "./common/makeThemeStyles";
 import ButtonPage from "./components/Button/ButtonPage";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -8,8 +9,10 @@ import Login from "./components/Login/Login";
 import ThemeBuilderPage from "./components/ThemeBuilder/ThemeBuilderPage";
 
 function App() {
+    const theme = useSelector((state) => state.theme.site);
+    const cssVarStyles = makeThemeStyles(theme);
     return (
-        <JCSSApp>
+        <div className="app" style={cssVarStyles}>
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -18,7 +21,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
             </Routes>
             <Footer />
-        </JCSSApp>
+        </div>
     );
 }
 
