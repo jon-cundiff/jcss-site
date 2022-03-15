@@ -12,11 +12,18 @@ const defaultTheme = {
 };
 
 router.get("/", async (req, res) => {
-    const themes = await models.Theme.findAll({
-        order: [["createdAt", "DESC"]],
-    });
+    try {
+        const themes = await models.Theme.findAll({
+            order: [["createdAt", "DESC"]],
+        });
 
-    res.json(themes);
+        res.json(themes);
+    } catch {
+        res.status(400).json({
+            success: false,
+            message: "Error getting themes",
+        });
+    }
 });
 
 router.post("/new", validateJwt, (req, res) => {
