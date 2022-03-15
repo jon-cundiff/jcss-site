@@ -1,0 +1,13 @@
+.reset-button {
+    position: absolute;
+    bottom: 3.5rem;
+    right: 0.5rem;
+    box-shadow: 4px 4px 10px rgba(236, 232, 192, 0.6);
+}
+
+@media screen and (min-width: 600px) {
+    .reset-button {
+        bottom: 0.5rem;
+        font-size: 0.8rem;
+    }
+}

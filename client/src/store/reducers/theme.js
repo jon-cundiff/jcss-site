@@ -2,6 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 import { defaultTheme } from "../../common/defaultTheme";
 
 const initialState = {
+    hasSiteChanged: false,
+    themeAlert: null,
     site: {
         primary: { ...defaultTheme.primary },
         secondary: { ...defaultTheme.secondary },
@@ -24,6 +26,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 site: action.payload,
+                hasSiteChanged: true,
+            };
+        case actionTypes.RESET_SITE_THEME:
+            return {
+                ...state,
+                site: initialState.site,
+                hasSiteChanged: false,
             };
         case actionTypes.SET_USER_THEME:
             return {
@@ -32,6 +41,21 @@ const reducer = (state = initialState, action) => {
                     ...state.user,
                     [action.payload.key]: action.payload.colors,
                 },
+            };
+        case actionTypes.RESET_USER_THEME:
+            return {
+                ...state,
+                user: initialState.user,
+            };
+        case actionTypes.SET_THEME_ALERT:
+            return {
+                ...state,
+                themeAlert: action.payload,
+            };
+        case actionTypes.RESET_THEME_ALERT:
+            return {
+                ...state,
+                themeAlert: null,
             };
         default:
             return state;

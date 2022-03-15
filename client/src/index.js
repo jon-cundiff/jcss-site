@@ -4,7 +4,12 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./store/store";
 import App from "./App";
+import { setBaseURL } from "./common/setAuthDefaults";
 import reportWebVitals from "./reportWebVitals";
+import { setVH } from "./common/setVH";
+
+setBaseURL();
+setVH();
 
 ReactDOM.render(
     <React.StrictMode>

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            models.Theme.belongsTo(models.User);
+            models.Theme.belongsTo(models.User, { foreignKey: "id" });
             models.Theme.hasMany(models.Favorite, {
                 as: "favorites",
                 foreignKey: "theme_id",
@@ -24,10 +24,6 @@ module.exports = (sequelize, DataTypes) => {
             info: DataTypes.STRING,
             success: DataTypes.STRING,
             danger: DataTypes.STRING,
-            gap: DataTypes.STRING,
-            padding: DataTypes.STRING,
-            margin: DataTypes.STRING,
-            font_base: DataTypes.STRING,
         },
         {
             sequelize,
