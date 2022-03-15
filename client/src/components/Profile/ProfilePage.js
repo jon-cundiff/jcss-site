@@ -16,7 +16,6 @@ const ProfilePage = () => {
             axios
                 .get("/themes/profile")
                 .then((resp) => {
-                    console.log(resp.data);
                     setThemes(resp.data.themes);
                 })
                 .catch(() => {
@@ -71,7 +70,7 @@ const ProfilePage = () => {
                 title="Favorite Themes"
                 innerClassName="parent column card-column fgy-5"
             >
-                {favoriteItems[0]}
+                {favoriteItems}
             </Card>
         </MobileRow>
     );

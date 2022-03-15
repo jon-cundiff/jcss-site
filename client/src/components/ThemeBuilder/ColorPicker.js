@@ -32,7 +32,7 @@ const ColorPicker = ({ label }) => {
     }, []);
 
     const handleChange = (color) => {
-        const colorObj = buildPalette(color);
+        const colorObj = buildPalette(color.hex, true);
         dispatch(setUserTheme(label.toLowerCase(), colorObj));
     };
 

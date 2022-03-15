@@ -1,7 +1,8 @@
 import chroma from "chroma-js";
 
-export const buildPalette = (color) => {
-    let main = chroma(color.hex).darken(1.3);
+export const buildPalette = (color, darken) => {
+    let main = chroma(color);
+    if (darken) main = main.darken(1.3);
     while (chroma.contrast(main, "white") < 2) {
         main = main.darken(0.2);
     }

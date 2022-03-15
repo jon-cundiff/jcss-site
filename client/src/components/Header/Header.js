@@ -21,6 +21,7 @@ const Header = () => {
               },
               {
                   inner: user.username,
+                  link: "/profile",
               },
               {
                   inner: (

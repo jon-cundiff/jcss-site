@@ -10,10 +10,13 @@ import {
     resetUserTheme,
     resetThemeAlert,
 } from "../../store/actions/actionCreators";
+import { useSearchParams } from "react-router-dom";
 
 const ThemeBuilderPage = () => {
     const dispatch = useDispatch();
     const themeBranch = useSelector((state) => state.theme);
+    const [params] = useSearchParams();
+    const themeId = params.get("id");
     const { user: theme, themeAlert } = themeBranch;
     const cssVarStyles = makeThemeStyles(theme);
 
