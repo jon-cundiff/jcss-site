@@ -113,6 +113,10 @@ router.delete("/delete", validateJwt, async (req, res) => {
                 user_id: req.userId,
             },
         });
+        res.json({
+            success: true,
+            message: "Theme successfully deleted",
+        });
     } catch {
         res.status(400).json({
             success: false,

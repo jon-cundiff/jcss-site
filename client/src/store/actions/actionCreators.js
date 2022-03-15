@@ -88,6 +88,20 @@ export const updateTheme = (theme, themeId) => async (dispatch) => {
     }
 };
 
+export const deleteTheme = async (themeId) => {
+    await axios.delete("/themes/delete", { data: { id: themeId } });
+    return { success: true };
+};
+
+export const getUserThemes = async () => {
+    try {
+        const resp = await axios.get("/themes/profile");
+        return resp.data.themes;
+    } catch {
+        return { success: false };
+    }
+};
+
 export const setThemeAlert = (success) => {
     return {
         type: actionTypes.SET_THEME_ALERT,

@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Card, MobileRow } from "@jon-cundiff/jcss-components";
+import { Card, MobileRow, Alert } from "@jon-cundiff/jcss-components";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import ThemeRow from "../Common/ThemeRow";
+import { getUserThemes } from "../../store/actions/actionCreators";
 
 const ProfilePage = () => {
-    const user = useSelector((state) => state.auth.user);
     const [themes, setThemes] = useState(null);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
+
+    const populateThemes = async () => {
+        try {
+            const themes = await getUserThemes();
+            setThemes(themes);
+        } catch {
+            setError("There was an error loading themes");
+        }
+    };
 
     useEffect(() => {
-        if (themes === null && !error) {
-            axios
-                .get("/themes/profile")
-                .then((resp) => {
-                    setThemes(resp.data.themes);
-                })
-                .catch(() => {
-                    setError(true);
-                });
-        }
-    });
+        populateThemes();
+    }, []);
     let themeItems = (
         <p>
             <i>Loading themes...</i>
@@ -36,7 +35,13 @@ const ProfilePage = () => {
                 </p>
             ) : (
                 themes.map((theme) => (
-                    <ThemeRow key={theme.id} theme={theme} owner />
+                    <ThemeRow
+                        key={theme.id}
+                        theme={theme}
+                        owner
+                        onDelete={populateThemes}
+                        onError={setError}
+                    />
                 ))
             );
     }
@@ -57,22 +62,32 @@ const ProfilePage = () => {
             );
     }
     return (
-        <MobileRow className="card-2 fgy-5 row-fill justify-center">
-            <Card
-                styleType="primary"
-                title="My Themes"
-                innerClassName="parent column card-column"
-            >
-                {themeItems}
-            </Card>
-            <Card
-                styleType="secondary"
-                title="Favorite Themes"
-                innerClassName="parent column card-column fgy-5"
-            >
-                {favoriteItems}
-            </Card>
-        </MobileRow>
+        <>
+            {error && (
+                <Alert
+                    text={error}
+                    styleType="danger"
+                    showClose
+                    onClick={() => setError(null)}
+                />
+            )}
+            <MobileRow className="card-2 fgy-5 row-fill justify-center">
+                <Card
+                    styleType="primary"
+                    title="My Themes"
+                    innerClassName="parent column card-column"
+                >
+                    {themeItems}
+                </Card>
+                <Card
+                    styleType="secondary"
+                    title="Favorite Themes"
+                    innerClassName="parent column card-column fgy-5"
+                >
+                    {favoriteItems}
+                </Card>
+            </MobileRow>
+        </>
     );
 };
 

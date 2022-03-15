@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 
 import "./ThemeRow.css";
 import { useNavigate } from "react-router-dom";
-import { setUserTheme } from "../../store/actions/actionCreators";
+import { deleteTheme, setUserTheme } from "../../store/actions/actionCreators";
 import { buildPalette } from "../../common/buildPalette";
 
-const ThemeRow = ({ theme, owner }) => {
+const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,6 +23,16 @@ const ThemeRow = ({ theme, owner }) => {
             navigate(`/builder?id=${themeId}`);
         } else {
             navigate("/builder");
+        }
+    };
+
+    const handleDeleteClick = async () => {
+        try {
+            await deleteTheme(theme.id);
+            onDelete();
+        } catch {
+            console.log("hi");
+            onError("Error deleting theme");
         }
     };
 
@@ -66,7 +76,11 @@ const ThemeRow = ({ theme, owner }) => {
                     Apply
                 </Button>
                 {owner && (
-                    <Button faIcon="fas fa-trash" styleType="danger">
+                    <Button
+                        faIcon="fas fa-trash"
+                        styleType="danger"
+                        onClick={handleDeleteClick}
+                    >
                         Delete
                     </Button>
                 )}
