@@ -17,7 +17,6 @@ const Header = () => {
         ? [
               {
                   inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
-                  external: true,
                   link: "/builder",
               },
               {
@@ -38,7 +37,6 @@ const Header = () => {
         : [
               {
                   inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
-                  external: true,
                   link: "/builder",
               },
               {

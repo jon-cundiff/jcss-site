@@ -33,7 +33,7 @@ const ColorPicker = ({ label }) => {
 
     const handleChange = (color) => {
         let main = chroma(color.hex).darken(1.3);
-        while (chroma.contrast(main, "white") < 2.5) {
+        while (chroma.contrast(main, "white") < 2) {
             main = main.darken(0.2);
         }
         const colorSwatch = chroma.scale(["white", main, "black"]).colors(21);
