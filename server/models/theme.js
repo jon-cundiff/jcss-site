@@ -24,10 +24,6 @@ module.exports = (sequelize, DataTypes) => {
             info: DataTypes.STRING,
             success: DataTypes.STRING,
             danger: DataTypes.STRING,
-            gap: DataTypes.STRING,
-            padding: DataTypes.STRING,
-            margin: DataTypes.STRING,
-            font_base: DataTypes.STRING,
         },
         {
             sequelize,

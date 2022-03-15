@@ -6,6 +6,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const indexRoutes = require("./routes");
 const authRoutes = require("./routes/login");
+const themesRoutes = require("./routes/themes");
 
 const PORT = process.env.PORT || 8080;
 
@@ -28,5 +29,6 @@ app.use(
 
 app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
+app.use("/themes", themesRoutes);
 
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));
