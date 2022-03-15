@@ -4,7 +4,7 @@
     the variable is the full visible portion.
 */
 const setCssVH = () => {
-    const vh = Math.floor(window.innerHeight * 0.01);
+    const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
 };
 
