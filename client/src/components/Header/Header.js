@@ -52,7 +52,7 @@ const Header = () => {
 
     return (
         <JCSSHeader
-            styleType="secondary"
+            styleType="primary"
             logoText="JCSS"
             leftChildren={leftChildren}
             rightChildren={rightChildren}

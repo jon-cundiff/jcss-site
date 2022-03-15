@@ -36,24 +36,42 @@ const ProfilePage = () => {
                     No themes found. Create on <Link to="/builder">here</Link>!
                 </p>
             ) : (
+                themes.map((theme) => (
+                    <ThemeRow key={theme.id} theme={theme} owner />
+                ))
+            );
+    }
+
+    let favoriteItems = (
+        <p>
+            <i>Loading themes...</i>
+        </p>
+    );
+    if (themes !== null) {
+        favoriteItems =
+            themes.length === 0 ? (
+                <p>
+                    No themes found. Create on <Link to="/builder">here</Link>!
+                </p>
+            ) : (
                 themes.map((theme) => <ThemeRow key={theme.id} theme={theme} />)
             );
     }
     return (
-        <MobileRow className="card-2">
+        <MobileRow className="card-2 fgy-5 row-fill justify-center">
             <Card
                 styleType="primary"
                 title="My Themes"
-                innerClassName="parent column card-column fgy-5"
+                innerClassName="parent column card-column"
             >
                 {themeItems}
             </Card>
             <Card
-                styleType="primary"
+                styleType="secondary"
                 title="Favorite Themes"
                 innerClassName="parent column card-column fgy-5"
             >
-                {themeItems[0]}
+                {favoriteItems[0]}
             </Card>
         </MobileRow>
     );

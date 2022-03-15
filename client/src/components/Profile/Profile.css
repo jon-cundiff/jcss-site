@@ -8,7 +8,7 @@
 
 @media screen and (min-width: 600px) {
     .card-2 .card {
-        width: 46%;
+        width: 47%;
         min-height: calc(var(--vh, 1vh) * 80);
     }
 }
