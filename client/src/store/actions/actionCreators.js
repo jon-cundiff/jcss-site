@@ -74,12 +74,18 @@ export const postTheme = (theme) => async (dispatch) => {
 
 export const setThemeAlert = (success) => {
     return {
-        type: actionTypes.setThemeAlert,
+        type: actionTypes.SET_THEME_ALERT,
         payload: {
             success: success,
             message: success
                 ? "Your theme was saved successfully."
                 : "There was an error saving your theme.",
         },
+    };
+};
+
+export const resetThemeAlert = () => {
+    return {
+        type: actionTypes.RESET_THEME_ALERT,
     };
 };

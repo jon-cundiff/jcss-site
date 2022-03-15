@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const setBaseURL = () => {
-    console.log(axios);
     axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 };
 

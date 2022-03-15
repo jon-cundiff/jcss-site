@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
             order: [["createdAt", "DESC"]],
         });
 
-        res.status(201).json(themes);
+        res.json(themes);
     } catch {
         res.status(400).json({
             success: false,
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 router.post("/new", validateJwt, (req, res) => {
     const { primary, secondary, info, success, danger } = req.body;
     try {
-        const theme = model.Theme.create({
+        const theme = models.Theme.create({
             primary: primary ? primary : defaultTheme.primary,
             secondary: secondary ? secondary : defaultTheme.secondary,
             info: info ? info : defaultTheme.info,
@@ -37,12 +37,13 @@ router.post("/new", validateJwt, (req, res) => {
             danger: danger ? danger : defaultTheme.danger,
             user_id: req.userId,
         });
-        res.json({
+        res.status(201).json({
             success: true,
             message: "Theme successfully created",
             newTheme: theme,
         });
-    } catch {
+    } catch (err) {
+        console.log(err);
         res.status(400).json({
             success: false,
             message: "There was an error saving the theme.",
