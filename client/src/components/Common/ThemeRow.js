@@ -13,13 +13,17 @@ const ThemeRow = ({ theme, owner }) => {
 
     const themeKeys = ["primary", "secondary", "info", "success", "danger"];
 
-    const handleEditClick = () => {
+    const handleEditCloneClick = (themeId) => {
         for (let key of themeKeys) {
             const colorObj = buildPalette(theme[key]);
             dispatch(setUserTheme(key, colorObj));
         }
 
-        navigate(`/builder?id=${theme.id}`);
+        if (themeId) {
+            navigate(`/builder?id=${themeId}`);
+        } else {
+            navigate("/builder");
+        }
     };
 
     const themeItems = themeKeys.map((key, i) => (
@@ -44,11 +48,18 @@ const ThemeRow = ({ theme, owner }) => {
                 data-owner={owner ? "owner" : "other"}
             >
                 {owner && (
-                    <Button faIcon="fas fa-edit" onClick={handleEditClick}>
+                    <Button
+                        faIcon="fas fa-edit"
+                        onClick={() => handleEditCloneClick(theme.id)}
+                    >
                         Edit
                     </Button>
                 )}
-                <Button faIcon="fas fa-copy" styleType="info">
+                <Button
+                    faIcon="fas fa-copy"
+                    styleType="info"
+                    onClick={() => handleEditCloneClick()}
+                >
                     Clone
                 </Button>
                 <Button faIcon="fas fa-angle-double-up" styleType="secondary">
