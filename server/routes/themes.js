@@ -17,7 +17,28 @@ router.get("/", async (req, res) => {
             order: [["createdAt", "DESC"]],
         });
 
-        res.json(themes);
+        res.json({
+            success: true,
+            themes,
+        });
+    } catch {
+        res.status(400).json({
+            success: false,
+            message: "Error getting themes",
+        });
+    }
+});
+
+router.get("/profile", validateJwt, async (req, res) => {
+    try {
+        const themes = await models.Theme.findAll({
+            where: { user_id: req.userId },
+        });
+
+        res.json({
+            success: true,
+            themes,
+        });
     } catch {
         res.status(400).json({
             success: false,
@@ -42,8 +63,7 @@ router.post("/new", validateJwt, (req, res) => {
             message: "Theme successfully created",
             newTheme: theme,
         });
-    } catch (err) {
-        console.log(err);
+    } catch {
         res.status(400).json({
             success: false,
             message: "There was an error saving the theme.",
