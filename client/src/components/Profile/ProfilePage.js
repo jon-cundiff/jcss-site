@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Row, MobileRow } from "@jon-cundiff/jcss-components";
+import { Card, MobileRow } from "@jon-cundiff/jcss-components";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";

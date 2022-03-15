@@ -71,4 +71,53 @@ router.post("/new", validateJwt, (req, res) => {
     }
 });
 
+router.put("/update", validateJwt, (req, res) => {
+    const { primary, secondary, info, success, danger, id } = req.body;
+    try {
+        const theme = models.Theme.update(
+            {
+                primary: primary ? primary : defaultTheme.primary,
+                secondary: secondary ? secondary : defaultTheme.secondary,
+                info: info ? info : defaultTheme.info,
+                success: success ? success : defaultTheme.success,
+                danger: danger ? danger : defaultTheme.danger,
+                user_id: req.userId,
+            },
+            {
+                where: {
+                    id,
+                    user_id: req.userId,
+                },
+            }
+        );
+        res.status(200).json({
+            success: true,
+            message: "Theme successfully updated",
+            newTheme: theme,
+        });
+    } catch {
+        res.status(400).json({
+            success: false,
+            message: "There was an error updating the theme.",
+        });
+    }
+});
+
+router.delete("/delete", validateJwt, async (req, res) => {
+    const { id } = req.body;
+    try {
+        await models.Theme.destroy({
+            where: {
+                id,
+                user_id: req.userId,
+            },
+        });
+    } catch {
+        res.status(400).json({
+            success: false,
+            message: "There was an error deleting the theme.",
+        });
+    }
+});
+
 module.exports = router;
