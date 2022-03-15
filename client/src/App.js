@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { Button } from "@jon-cundiff/jcss-components";
 import { makeThemeStyles } from "./common/makeThemeStyles";
 import ButtonPage from "./components/Button/ButtonPage";
 import Footer from "./components/Footer/Footer";
@@ -8,9 +9,20 @@ import HomePage from "./components/Home/HomePage";
 import Login from "./components/Login/Login";
 import ThemeBuilderPage from "./components/ThemeBuilder/ThemeBuilderPage";
 
+import "./App.css";
+import { useDispatch } from "react-redux";
+import { resetSiteTheme } from "./store/actions/actionCreators";
+
 function App() {
-    const theme = useSelector((state) => state.theme.site);
+    const dispatch = useDispatch();
+    const themeBranch = useSelector((state) => state.theme);
+    const { site: theme, hasSiteChanged } = themeBranch;
     const cssVarStyles = makeThemeStyles(theme);
+
+    const handleSiteReset = () => {
+        dispatch(resetSiteTheme());
+    };
+
     return (
         <div className="app" style={cssVarStyles}>
             <Header />
@@ -21,6 +33,15 @@ function App() {
                 <Route path="/login" element={<Login />} />
             </Routes>
             <Footer />
+            {hasSiteChanged && (
+                <Button
+                    onClick={handleSiteReset}
+                    styleType="info"
+                    className="reset-button"
+                >
+                    Reset Site Theme
+                </Button>
+            )}
         </div>
     );
 }
