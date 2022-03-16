@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 
 import "./ThemeRow.css";
 import { useNavigate } from "react-router-dom";
-import { deleteTheme, setUserTheme } from "../../store/actions/actionCreators";
+import {
+    deleteTheme,
+    setSiteTheme,
+    setUserTheme,
+} from "../../store/actions/actionCreators";
 import { buildPalette } from "../../common/buildPalette";
 
 const ThemeRow = ({ theme, owner, onDelete, onError }) => {
@@ -13,9 +17,18 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
 
     const themeKeys = ["primary", "secondary", "info", "success", "danger"];
 
-    const handleEditCloneClick = (themeId) => {
+    const buildTheme = () => {
+        let builtTheme = {};
         for (let key of themeKeys) {
-            const colorObj = buildPalette(theme[key]);
+            builtTheme[key] = buildPalette(theme[key]);
+        }
+        return builtTheme;
+    };
+
+    const handleEditCloneClick = (themeId) => {
+        const builtTheme = buildTheme();
+        for (let key of themeKeys) {
+            const colorObj = builtTheme[key];
             dispatch(setUserTheme(key, colorObj));
         }
 
@@ -24,6 +37,11 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
         } else {
             navigate("/builder");
         }
+    };
+
+    const handleApplyClick = () => {
+        const builtTheme = buildTheme();
+        dispatch(setSiteTheme(builtTheme));
     };
 
     const handleDeleteClick = async () => {
@@ -72,7 +90,11 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
                 >
                     Clone
                 </Button>
-                <Button faIcon="fas fa-angle-double-up" styleType="secondary">
+                <Button
+                    faIcon="fas fa-angle-double-up"
+                    styleType="secondary"
+                    onClick={handleApplyClick}
+                >
                     Apply
                 </Button>
                 {owner && (

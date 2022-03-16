@@ -16,7 +16,11 @@ const Header = () => {
     const rightChildren = user
         ? [
               {
-                  inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
+                  inner: (
+                      <span>
+                          <i className="fas fa-plus mr-2"></i>Theme Builder
+                      </span>
+                  ),
                   link: "/builder",
               },
               {
@@ -37,7 +41,11 @@ const Header = () => {
           ]
         : [
               {
-                  inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
+                  inner: (
+                      <span>
+                          <i className="fas fa-plus mr-2"></i>Theme Builder
+                      </span>
+                  ),
                   link: "/builder",
               },
               {
