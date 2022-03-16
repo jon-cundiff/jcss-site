@@ -48,6 +48,47 @@ router.get("/profile", validateJwt, async (req, res) => {
     }
 });
 
+router.post("/add-favorite", validateJwt, async (req, res) => {
+    const { themeId } = req.body;
+    try {
+        await models.Favorite.create({
+            user_id: req.userId,
+            theme_id: themeId,
+        });
+
+        res.status(201).json({
+            success: true,
+            message: "Favorite saved",
+        });
+    } catch {
+        res.status(400).json({
+            success: false,
+            message: "There was an error saving the favorite",
+        });
+    }
+});
+
+router.delete("/delete-favorite", async (req, res) => {
+    const { id } = req.body;
+    try {
+        await models.Favorite.delete({
+            where: {
+                id,
+                user_id: req.userId,
+            },
+        });
+        res.json({
+            success: true,
+            message: "Favorite successfully removed",
+        });
+    } catch {
+        res.status(400).json({
+            success: false,
+            message: "Error removing favorite",
+        });
+    }
+});
+
 router.post("/new", validateJwt, (req, res) => {
     const { primary, secondary, info, success, danger } = req.body;
     try {
