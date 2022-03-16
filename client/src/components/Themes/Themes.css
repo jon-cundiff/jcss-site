@@ -1,0 +1,9 @@
+@media screen and (min-width: 600px) {
+    .card-themes.card {
+        min-height: calc(var(--vh, 1vh) * 80);
+    }
+
+    .card-themes.card .card-body {
+        height: 100%;
+    }
+}

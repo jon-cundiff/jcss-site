@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const models = require("../models");
 const validateJwt = require("../middleware/validateJwt");
+const applyJwt = require("../middleware/applyJwt");
 
 const defaultTheme = {
     primary: "#6e41e2",
@@ -11,17 +12,28 @@ const defaultTheme = {
     danger: "#c7302b",
 };
 
-router.get("/", async (req, res) => {
+router.get("/", applyJwt, async (req, res) => {
+    const include = [];
+    if (req.userId) {
+        include.push({
+            model: models.Favorite,
+            as: "favorites",
+            where: { user_id: req.userId },
+            required: false,
+        });
+    }
     try {
         const themes = await models.Theme.findAll({
             order: [["createdAt", "DESC"]],
+            include,
         });
 
         res.json({
             success: true,
             themes,
         });
-    } catch {
+    } catch (err) {
+        console.log(err);
         res.status(400).json({
             success: false,
             message: "Error getting themes",
@@ -34,6 +46,14 @@ router.get("/profile", validateJwt, async (req, res) => {
         const themes = await models.Theme.findAll({
             where: { user_id: req.userId },
             order: [["createdAt", "DESC"]],
+            include: [
+                {
+                    model: models.Favorite,
+                    as: "favorites",
+                    where: { user_id: req.userId },
+                    required: false,
+                },
+            ],
         });
 
         res.json({
@@ -48,10 +68,35 @@ router.get("/profile", validateJwt, async (req, res) => {
     }
 });
 
+router.get("/favorites", validateJwt, async (req, res) => {
+    try {
+        const favorites = await models.Theme.findAll({
+            order: [["createdAt", "DESC"]],
+            include: [
+                {
+                    model: models.Favorite,
+                    as: "favorites",
+                    where: { user_id: req.userId },
+                },
+            ],
+        });
+        res.json({
+            success: true,
+            favorites,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({
+            success: false,
+            message: "There was an error saving the favorite",
+        });
+    }
+});
+
 router.post("/add-favorite", validateJwt, async (req, res) => {
     const { themeId } = req.body;
     try {
-        await models.Favorite.create({
+        const favorite = await models.Favorite.create({
             user_id: req.userId,
             theme_id: themeId,
         });
@@ -59,6 +104,7 @@ router.post("/add-favorite", validateJwt, async (req, res) => {
         res.status(201).json({
             success: true,
             message: "Favorite saved",
+            favorite,
         });
     } catch {
         res.status(400).json({
@@ -68,10 +114,11 @@ router.post("/add-favorite", validateJwt, async (req, res) => {
     }
 });
 
-router.delete("/delete-favorite", async (req, res) => {
+router.delete("/delete-favorite", validateJwt, async (req, res) => {
     const { id } = req.body;
+    console.log(id);
     try {
-        await models.Favorite.delete({
+        await models.Favorite.destroy({
             where: {
                 id,
                 user_id: req.userId,
@@ -81,7 +128,8 @@ router.delete("/delete-favorite", async (req, res) => {
             success: true,
             message: "Favorite successfully removed",
         });
-    } catch {
+    } catch (err) {
+        console.log(err);
         res.status(400).json({
             success: false,
             message: "Error removing favorite",
