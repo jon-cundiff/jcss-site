@@ -16,11 +16,16 @@ const Header = () => {
     const rightChildren = user
         ? [
               {
-                  inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
+                  inner: (
+                      <span>
+                          <i className="fas fa-plus mr-2"></i>Theme Builder
+                      </span>
+                  ),
                   link: "/builder",
               },
               {
                   inner: user.username,
+                  link: "/profile",
               },
               {
                   inner: (
@@ -36,7 +41,11 @@ const Header = () => {
           ]
         : [
               {
-                  inner: <Button faIcon="fas fa-plus">Theme Builder</Button>,
+                  inner: (
+                      <span>
+                          <i className="fas fa-plus mr-2"></i>Theme Builder
+                      </span>
+                  ),
                   link: "/builder",
               },
               {
@@ -52,7 +61,7 @@ const Header = () => {
 
     return (
         <JCSSHeader
-            styleType="secondary"
+            styleType="primary"
             logoText="JCSS"
             leftChildren={leftChildren}
             rightChildren={rightChildren}

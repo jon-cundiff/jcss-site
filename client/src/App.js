@@ -12,6 +12,8 @@ import ThemeBuilderPage from "./components/ThemeBuilder/ThemeBuilderPage";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { resetSiteTheme } from "./store/actions/actionCreators";
+import ProtectedRoute from "./components/Common/ProtectedRoute";
+import ProfilePage from "./components/Profile/ProfilePage";
 
 function App() {
     const dispatch = useDispatch();
@@ -30,7 +32,22 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/button" element={<ButtonPage />} />
                 <Route path="/builder" element={<ThemeBuilderPage />} />
-                <Route path="/login" element={<Login />} />
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute auth>
+                            <ProfilePage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/login"
+                    element={
+                        <ProtectedRoute>
+                            <Login />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
             <Footer />
             {hasSiteChanged && (

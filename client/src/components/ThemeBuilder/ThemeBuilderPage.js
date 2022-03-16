@@ -9,11 +9,16 @@ import {
     setSiteTheme,
     resetUserTheme,
     resetThemeAlert,
+    updateTheme,
 } from "../../store/actions/actionCreators";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const ThemeBuilderPage = () => {
     const dispatch = useDispatch();
     const themeBranch = useSelector((state) => state.theme);
+    const [params] = useSearchParams();
+    const themeId = params.get("id");
     const { user: theme, themeAlert } = themeBranch;
     const cssVarStyles = makeThemeStyles(theme);
 
@@ -22,7 +27,11 @@ const ThemeBuilderPage = () => {
     };
 
     const handleThemeSave = () => {
-        dispatch(postTheme(theme));
+        if (themeId) {
+            dispatch(updateTheme(theme, themeId));
+        } else {
+            dispatch(postTheme(theme));
+        }
     };
 
     const handleResetUserTheme = () => {
@@ -32,6 +41,8 @@ const ThemeBuilderPage = () => {
     const handleClearAlert = () => {
         dispatch(resetThemeAlert());
     };
+
+    useEffect(() => () => dispatch(resetThemeAlert()), []);
     return (
         <Column>
             {themeAlert && (
@@ -63,11 +74,13 @@ const ThemeBuilderPage = () => {
             <Button styleType="primary" onClick={handleThemeUpdate}>
                 Preview on Site
             </Button>
-            <Button styleType="danger" onClick={handleResetUserTheme}>
-                Reset Theme
-            </Button>
+            {!themeId && (
+                <Button styleType="danger" onClick={handleResetUserTheme}>
+                    Reset Theme
+                </Button>
+            )}
             <Button styleType="info" onClick={handleThemeSave}>
-                Save Theme
+                {themeId ? "Update" : "Save"} Theme
             </Button>
         </Column>
     );

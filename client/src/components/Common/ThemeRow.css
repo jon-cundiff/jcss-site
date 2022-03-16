@@ -1,0 +1,25 @@
+.theme-box {
+    box-shadow: 1px 1px 5px rgba(10, 10, 10, 0.4);
+}
+
+.theme-controls button {
+    padding: 1rem;
+    width: 22%;
+}
+
+.theme-controls[data-owner] button {
+    width: 45%;
+}
+
+@media screen and (min-width: 600px) and (max-width: 991px) {
+    .theme-controls button {
+        padding: 0.5rem;
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .theme-controls button {
+        padding: 0.5rem;
+    }
+}

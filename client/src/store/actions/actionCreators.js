@@ -72,6 +72,36 @@ export const postTheme = (theme) => async (dispatch) => {
     }
 };
 
+export const updateTheme = (theme, themeId) => async (dispatch) => {
+    const colorsMain = { id: themeId };
+
+    for (let [key, val] of Object.entries(theme)) {
+        colorsMain[key] = val.main;
+    }
+
+    try {
+        const resp = await axios.put("/themes/update", colorsMain);
+        if (resp.status !== 200) throw new Error();
+        dispatch(setThemeAlert(true));
+    } catch {
+        dispatch(setThemeAlert(false));
+    }
+};
+
+export const deleteTheme = async (themeId) => {
+    await axios.delete("/themes/delete", { data: { id: themeId } });
+    return { success: true };
+};
+
+export const getUserThemes = async () => {
+    try {
+        const resp = await axios.get("/themes/profile");
+        return resp.data.themes;
+    } catch {
+        return { success: false };
+    }
+};
+
 export const setThemeAlert = (success) => {
     return {
         type: actionTypes.SET_THEME_ALERT,
