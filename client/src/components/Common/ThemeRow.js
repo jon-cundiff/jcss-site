@@ -5,13 +5,19 @@ import { useDispatch } from "react-redux";
 import "./ThemeRow.css";
 import { useNavigate } from "react-router-dom";
 import {
+    deleteFavorite,
     deleteTheme,
+    postFavorite,
     setSiteTheme,
     setUserTheme,
 } from "../../store/actions/actionCreators";
 import { buildPalette } from "../../common/buildPalette";
+import { useState } from "react";
 
 const ThemeRow = ({ theme, owner, onDelete, onError }) => {
+    const [favoriteId, setFavoriteId] = useState(
+        theme.favorites.length > 0 ? theme.favorites[0].id : null
+    );
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,6 +29,18 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
             builtTheme[key] = buildPalette(theme[key]);
         }
         return builtTheme;
+    };
+
+    const handleFavoriteClick = async () => {
+        try {
+            if (favoriteId) {
+                await deleteFavorite(favoriteId);
+                setFavoriteId(null);
+            } else {
+                const favorite = await postFavorite(theme.id);
+                setFavoriteId(favorite.id);
+            }
+        } catch {}
     };
 
     const handleEditCloneClick = (themeId) => {
@@ -67,8 +85,29 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     ));
 
     return (
-        <Column className="theme-box mx-3 fgy-0">
-            <Row justify="around" fgx={4}>
+        <Column className="theme-box mx-3 fgy-2">
+            <div
+                className="parent justify-center row-wrap theme-actions"
+                data-owner={owner ? "owner" : "other"}
+            >
+                {!owner && (
+                    <Button
+                        faIcon={favoriteId ? "fas fa-star" : "far fa-star"}
+                        styleType={favoriteId ? "success" : "info"}
+                        onClick={handleFavoriteClick}
+                    >
+                        Favorite
+                    </Button>
+                )}
+                <Button
+                    faIcon="fas fa-angle-double-up"
+                    styleType="secondary"
+                    onClick={handleApplyClick}
+                >
+                    Apply
+                </Button>
+            </div>
+            <Row justify="around" className="theme-box" fgx={4}>
                 {themeItems}
             </Row>
             <div
@@ -89,13 +128,6 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
                     onClick={() => handleEditCloneClick()}
                 >
                     Clone
-                </Button>
-                <Button
-                    faIcon="fas fa-angle-double-up"
-                    styleType="secondary"
-                    onClick={handleApplyClick}
-                >
-                    Apply
                 </Button>
                 {owner && (
                     <Button

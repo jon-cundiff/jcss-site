@@ -44,9 +44,9 @@ export const resetUserTheme = () => {
     };
 };
 
-export const getThemes = () => async (dispatch) => {
-    const themes = await axios.get("/themes");
-    dispatch(setThemes(themes));
+export const getThemes = async () => {
+    const resp = await axios.get("/themes");
+    return resp.data.themes;
 };
 
 export const setThemes = (themes) => {
@@ -90,6 +90,21 @@ export const updateTheme = (theme, themeId) => async (dispatch) => {
 
 export const deleteTheme = async (themeId) => {
     await axios.delete("/themes/delete", { data: { id: themeId } });
+    return { success: true };
+};
+
+export const getFavorites = async () => {
+    const resp = await axios.get("/themes/favorites");
+    return resp.data.favorites;
+};
+
+export const postFavorite = async (themeId) => {
+    const resp = await axios.post("/themes/add-favorite", { themeId });
+    return resp.data.favorite;
+};
+
+export const deleteFavorite = async (favoriteId) => {
+    await axios.delete("/themes/delete-favorite", { data: { id: favoriteId } });
     return { success: true };
 };
 

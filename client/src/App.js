@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { resetSiteTheme } from "./store/actions/actionCreators";
 import ProtectedRoute from "./components/Common/ProtectedRoute";
 import ProfilePage from "./components/Profile/ProfilePage";
+import ThemesPage from "./components/Themes/ThemesPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/button" element={<ButtonPage />} />
+                <Route path="/themes" element={<ThemesPage />} />
                 <Route path="/builder" element={<ThemeBuilderPage />} />
                 <Route
                     path="/profile"

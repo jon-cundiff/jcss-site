@@ -2,23 +2,30 @@
     box-shadow: 1px 1px 5px rgba(10, 10, 10, 0.4);
 }
 
+.theme-actions button {
+    padding: 0.5rem;
+    width: 46%;
+}
+
 .theme-controls button {
     padding: 1rem;
-    width: 22%;
 }
 
-.theme-controls[data-owner] button {
-    width: 45%;
+:is(.theme-controls, .theme-actions[data-owner="owner"]) button {
+    width: 100%;
 }
 
-@media screen and (min-width: 600px) and (max-width: 991px) {
-    .theme-controls button {
-        padding: 0.5rem;
-        width: 45%;
+.theme-controls[data-owner="owner"] button {
+    width: 29.8%;
+}
+
+@media screen and (min-width: 600px) and (max-width: 767px) {
+    .theme-controls[data-owner] button {
+        width: 100%;
     }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 600px) {
     .theme-controls button {
         padding: 0.5rem;
     }

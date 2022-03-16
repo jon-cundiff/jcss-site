@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Card, MobileRow, Alert } from "@jon-cundiff/jcss-components";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import ThemeRow from "../Common/ThemeRow";
-import { getUserThemes } from "../../store/actions/actionCreators";
+import {
+    getFavorites,
+    getUserThemes,
+} from "../../store/actions/actionCreators";
 
 const ProfilePage = () => {
     const [themes, setThemes] = useState(null);
+    const [favorites, setFavorites] = useState(null);
     const [error, setError] = useState(null);
 
     const populateThemes = async () => {
         try {
             const themes = await getUserThemes();
             setThemes(themes);
+            const favorites = await getFavorites();
+            setFavorites(favorites);
         } catch {
             setError("There was an error loading themes");
         }
@@ -51,14 +56,14 @@ const ProfilePage = () => {
             <i>Loading themes...</i>
         </p>
     );
-    if (themes !== null) {
+    if (favorites !== null) {
         favoriteItems =
-            themes.length === 0 ? (
-                <p>
-                    No themes found. Create on <Link to="/builder">here</Link>!
-                </p>
+            favorites.length === 0 ? (
+                <p>No favorites found.</p>
             ) : (
-                themes.map((theme) => <ThemeRow key={theme.id} theme={theme} />)
+                favorites.map((theme) => (
+                    <ThemeRow key={theme.id} theme={theme} />
+                ))
             );
     }
     return (
@@ -82,7 +87,7 @@ const ProfilePage = () => {
                 <Card
                     styleType="secondary"
                     title="Favorite Themes"
-                    innerClassName="parent column card-column fgy-5"
+                    innerClassName="parent column card-column"
                 >
                     {favoriteItems}
                 </Card>
