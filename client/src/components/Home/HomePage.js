@@ -3,8 +3,14 @@ import { Button, MobileRow, Column } from "@jon-cundiff/jcss-components";
 
 import "./HomePage.css";
 import jcssLogo from "./jcss-blue.svg";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+    const navigate = useNavigate();
+
+    const onStartedClick = () => {
+        navigate("/docs/getting-started");
+    };
     return (
         <Column className="px-5 mx-5 mt-5 pt-5">
             <MobileRow fill justify="around" fgx={5} className="mb-5 pb-5">
@@ -23,7 +29,9 @@ const HomePage = () => {
                     </p>
                 </Column>
             </MobileRow>
-            <Button styleType="secondary">Get Started</Button>
+            <Button styleType="secondary" onClick={onStartedClick}>
+                Get Started
+            </Button>
             <p>
                 Framework: <b>v0.2.3</b> | Component Library: <b>v0.2.5</b>
             </p>
