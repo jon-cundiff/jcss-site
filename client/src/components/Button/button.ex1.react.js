@@ -1,4 +1,4 @@
-const ex = `<Button>
+const ex = `<Button styleType="primary">
     Primary
 </Button>`;
 

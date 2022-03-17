@@ -12,8 +12,41 @@ const Header = () => {
 
     const leftChildren = [
         {
-            inner: "Buttons",
-            link: "/button",
+            inner: "Documentation",
+            itemChildren: [
+                {
+                    inner: "Getting Started",
+                    link: "/docs/getting-started",
+                },
+                {
+                    inner: "Layout",
+                    link: "/docs/layout",
+                },
+                {
+                    inner: "Header",
+                    link: "/docs/header",
+                },
+                {
+                    inner: "Footer",
+                    link: "/docs/footer",
+                },
+                {
+                    inner: "Button",
+                    link: "/docs/button",
+                },
+                {
+                    inner: "Dropdown",
+                    link: "/docs/dropdwon",
+                },
+                {
+                    inner: "Card",
+                    link: "/docs/card",
+                },
+                {
+                    inner: "Alert",
+                    link: "/docs/alert",
+                },
+            ],
         },
     ];
 

@@ -15,6 +15,12 @@ import ProtectedRoute from "./components/Common/ProtectedRoute";
 import ProfilePage from "./components/Profile/ProfilePage";
 import ThemesPage from "./components/Themes/ThemesPage";
 import GettingStartedPage from "./components/GettingStarted/GettingStartedPage";
+import LayoutPage from "./components/Layout/LayoutPage";
+import HeaderPage from "./components/Header/HeaderPage";
+import FooterPage from "./components/Footer/FooterPage";
+import DropdownPage from "./components/Dropdown/DropdownPage";
+import CardPage from "./components/Card/CardPage";
+import AlertPage from "./components/Alert/AlertPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -30,13 +36,19 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/button" element={<ButtonPage />} />
                 <Route path="/themes" element={<ThemesPage />} />
                 <Route path="/builder" element={<ThemeBuilderPage />} />
                 <Route
                     path="docs/getting-started"
                     element={<GettingStartedPage />}
                 />
+                <Route path="/docs/layout" element={<LayoutPage />} />
+                <Route path="/docs/header" element={<HeaderPage />} />
+                <Route path="/docs/footer" element={<FooterPage />} />
+                <Route path="/docs/button" element={<ButtonPage />} />
+                <Route path="/docs/dropdown" element={<DropdownPage />} />
+                <Route path="/docs/card" element={<CardPage />} />
+                <Route path="/docs/alert" element={<AlertPage />} />
                 <Route
                     path="/profile"
                     element={
