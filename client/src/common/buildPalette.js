@@ -9,8 +9,9 @@ export const buildPalette = (color, darken) => {
     const colorSwatch = chroma.scale(["white", main, "black"]).colors(21);
     const colorObj = {
         main: main.hex(),
-        lightest: colorSwatch[4],
-        lighter: colorSwatch[8],
+        "medium-light": colorSwatch[6],
+        lighter: colorSwatch[5],
+        lightest: colorSwatch[3],
         dark: colorSwatch[13],
     };
 

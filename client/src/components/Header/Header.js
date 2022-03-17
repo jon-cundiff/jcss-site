@@ -3,6 +3,8 @@ import { Header as JCSSHeader, Button } from "@jon-cundiff/jcss-components";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../store/actions/actionCreators";
 
+import "./Header.css";
+
 const Header = () => {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
@@ -13,16 +15,30 @@ const Header = () => {
         },
     ];
 
+    const themesList = {
+        inner: "Themes",
+        className: "no-hover",
+        itemChildren: [
+            {
+                inner: (
+                    <>
+                        <span>
+                            <i className="fas fa-plus mr-2"></i>Theme Builder
+                        </span>
+                    </>
+                ),
+                link: "/builder",
+            },
+            {
+                inner: "Browse Themes",
+                link: "/themes",
+            },
+        ],
+    };
+
     const rightChildren = user
         ? [
-              {
-                  inner: (
-                      <span>
-                          <i className="fas fa-plus mr-2"></i>Theme Builder
-                      </span>
-                  ),
-                  link: "/builder",
-              },
+              themesList,
               {
                   inner: user.username,
                   link: "/profile",
@@ -37,17 +53,11 @@ const Header = () => {
                       </Button>
                   ),
                   link: "/",
+                  className: "no-hover",
               },
           ]
         : [
-              {
-                  inner: (
-                      <span>
-                          <i className="fas fa-plus mr-2"></i>Theme Builder
-                      </span>
-                  ),
-                  link: "/builder",
-              },
+              themesList,
               {
                   inner: (
                       <Button styleType="info" faIcon="fab fa-github">
