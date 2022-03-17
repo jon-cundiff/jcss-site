@@ -62,4 +62,23 @@ router.get("/github/callback", passport.authenticate("github"), (req, res) => {
     }
 });
 
+router.get("/guest", async (req, res) => {
+    const [user, created] = await models.User.findOrCreate({
+        where: {
+            username: "GUEST",
+            url: "guest.com",
+        },
+    });
+
+    const token = jwt.sign(
+        {
+            id: user.id,
+            username: "GUEST",
+        },
+        process.env.JWT
+    );
+
+    res.json({ token: token, username: "GUEST" });
+});
+
 module.exports = router;

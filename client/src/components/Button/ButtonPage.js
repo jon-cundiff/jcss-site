@@ -14,7 +14,7 @@ const ButtonPage = () => {
                 <Button disabled>Primary Disabled</Button>
             </MobileRow>
             <MobileRow>
-                <Syntax codeString={ex1html} label="html" />
+                <Syntax codeString={ex1html} label="HTML" />
                 <Syntax codeString={ex1jsx} label="jcss-components" />
             </MobileRow>
         </Column>

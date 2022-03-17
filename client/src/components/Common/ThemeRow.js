@@ -11,9 +11,9 @@ import {
     setSiteTheme,
     setUserTheme,
 } from "../../store/actions/actionCreators";
-import { buildPalette } from "../../common/buildPalette";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { buildTheme } from "../../common/buildTheme";
 
 const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     const user = useSelector((state) => state.auth.user);
@@ -24,14 +24,6 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     const navigate = useNavigate();
 
     const themeKeys = ["primary", "secondary", "info", "success", "danger"];
-
-    const buildTheme = () => {
-        let builtTheme = {};
-        for (let key of themeKeys) {
-            builtTheme[key] = buildPalette(theme[key]);
-        }
-        return builtTheme;
-    };
 
     const handleFavoriteClick = async () => {
         try {
@@ -46,7 +38,7 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     };
 
     const handleEditCloneClick = (themeId) => {
-        const builtTheme = buildTheme();
+        const builtTheme = buildTheme(theme);
         for (let key of themeKeys) {
             const colorObj = builtTheme[key];
             dispatch(setUserTheme(key, colorObj));
@@ -60,7 +52,7 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     };
 
     const handleApplyClick = () => {
-        const builtTheme = buildTheme();
+        const builtTheme = buildTheme(theme);
         dispatch(setSiteTheme(builtTheme));
     };
 
