@@ -13,10 +13,12 @@ import {
 } from "../../store/actions/actionCreators";
 import { buildPalette } from "../../common/buildPalette";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const ThemeRow = ({ theme, owner, onDelete, onError }) => {
+    const user = useSelector((state) => state.auth.user);
     const [favoriteId, setFavoriteId] = useState(
-        theme.favorites.length > 0 ? theme.favorites[0].id : null
+        user && theme.favorites.length > 1 ? theme.favorites[0].id : null
     );
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -89,8 +91,9 @@ const ThemeRow = ({ theme, owner, onDelete, onError }) => {
             <div
                 className="parent justify-center row-wrap theme-actions"
                 data-owner={owner ? "owner" : "other"}
+                data-user={user ? "user" : "none"}
             >
-                {!owner && (
+                {!owner && user && (
                     <Button
                         faIcon={favoriteId ? "fas fa-star" : "far fa-star"}
                         styleType={favoriteId ? "success" : "info"}

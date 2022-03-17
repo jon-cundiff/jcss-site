@@ -7,8 +7,9 @@ const applyJwt = (req, res, next) => {
         jwt.verify(token, process.env.JWT, (err, decoded) => {
             if (err) throw new Error();
             req.userId = decoded.id;
+            next();
         });
-    } finally {
+    } catch {
         next();
     }
 };
