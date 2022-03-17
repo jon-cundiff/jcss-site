@@ -2,6 +2,11 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { setToken, unsetToken } from "../../common/setAuthDefaults";
 
+export const getGuestUser = () => async (dispatch) => {
+    const resp = await axios.get("/auth/guest");
+    dispatch(setUser(resp.data));
+};
+
 export const setUser = (user) => {
     setToken(user);
 
