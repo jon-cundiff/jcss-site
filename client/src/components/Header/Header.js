@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getGuestUser, logoutUser } from "../../store/actions/actionCreators";
 
 import "./Header.css";
+import jcssLogo from "./jcss.svg";
 
 const Header = () => {
     const user = useSelector((state) => state.auth.user);
@@ -87,7 +88,7 @@ const Header = () => {
     return (
         <JCSSHeader
             styleType="primary"
-            logoText="JCSS"
+            logoImg={jcssLogo}
             leftChildren={leftChildren}
             rightChildren={rightChildren}
         />

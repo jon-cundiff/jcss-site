@@ -1,3 +1,8 @@
 .pointer {
     cursor: pointer;
 }
+
+header.header {
+    padding: 0.5rem 2rem;
+    box-shadow: 0 4px 10px rgba(10, 10, 10, 0.6);
+}
