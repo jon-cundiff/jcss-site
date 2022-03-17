@@ -11,7 +11,7 @@ import "./GettingStarted.css";
 
 const GettingStartedPage = () => {
     return (
-        <>
+        <Column className="mx-5">
             <Card title="Getting Started">
                 <Column>
                     <h1>Installation</h1>
@@ -60,7 +60,7 @@ const GettingStartedPage = () => {
                     </div>
                 </Column>
             </Card>
-        </>
+        </Column>
     );
 };
 
