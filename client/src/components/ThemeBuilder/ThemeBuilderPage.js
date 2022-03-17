@@ -1,5 +1,11 @@
 import React from "react";
-import { Column, MobileRow, Button, Alert } from "@jon-cundiff/jcss-components";
+import {
+    Column,
+    MobileRow,
+    Button,
+    Alert,
+    Card,
+} from "@jon-cundiff/jcss-components";
 import ColorPicker from "./ColorPicker";
 import { makeThemeStyles } from "../../common/makeThemeStyles";
 import { useSelector } from "react-redux";
@@ -13,6 +19,8 @@ import {
 } from "../../store/actions/actionCreators";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { prepareDownload } from "../../common/prepareDownload";
+import CustomInstructions from "../Common/CustomInstructions";
 
 const ThemeBuilderPage = () => {
     const dispatch = useDispatch();
@@ -43,6 +51,10 @@ const ThemeBuilderPage = () => {
         dispatch(resetThemeAlert());
     };
 
+    const handleDownloadClick = () => {
+        prepareDownload(theme);
+    };
+
     const saveButton = user ? (
         <Button styleType="info" onClick={handleThemeSave}>
             {themeId ? "Update" : "Save"} Theme
@@ -64,33 +76,52 @@ const ThemeBuilderPage = () => {
                     showClose
                 />
             )}
-            <div style={cssVarStyles} className="mx-5">
-                <MobileRow wrap>
-                    <ColorPicker
-                        label="Primary"
-                        colorMain={theme.primary.main}
-                    />
-                    <ColorPicker
-                        label="Secondary"
-                        colorMain={theme.secondary.main}
-                    />
-                    <ColorPicker label="Info" colorMain={theme.info.main} />
-                    <ColorPicker
-                        label="Success"
-                        colorMain={theme.success.main}
-                    />
-                    <ColorPicker label="Danger" colorMain={theme.danger.main} />
-                </MobileRow>
-            </div>
-            <Button styleType="primary" onClick={handleThemeUpdate}>
-                Preview on Site
-            </Button>
-            {!themeId && (
-                <Button styleType="danger" onClick={handleResetUserTheme}>
-                    Reset Theme
-                </Button>
-            )}
-            {saveButton}
+            <Card title="Theme Builder">
+                <Column>
+                    <div style={cssVarStyles} className="mx-5">
+                        <MobileRow wrap>
+                            <ColorPicker
+                                label="Primary"
+                                colorMain={theme.primary.main}
+                            />
+                            <ColorPicker
+                                label="Secondary"
+                                colorMain={theme.secondary.main}
+                            />
+                            <ColorPicker
+                                label="Info"
+                                colorMain={theme.info.main}
+                            />
+                            <ColorPicker
+                                label="Success"
+                                colorMain={theme.success.main}
+                            />
+                            <ColorPicker
+                                label="Danger"
+                                colorMain={theme.danger.main}
+                            />
+                        </MobileRow>
+                    </div>
+                    <Button styleType="primary" onClick={handleThemeUpdate}>
+                        Preview on Site
+                    </Button>
+                    {!themeId && (
+                        <Button
+                            styleType="danger"
+                            onClick={handleResetUserTheme}
+                        >
+                            Reset Theme
+                        </Button>
+                    )}
+                    {saveButton}
+                    <Button styleType="success" onClick={handleDownloadClick}>
+                        Download Theme
+                    </Button>
+                </Column>
+            </Card>
+            <Card title="Using Custom Themes" styleType="secondary">
+                <CustomInstructions />
+            </Card>
         </Column>
     );
 };
