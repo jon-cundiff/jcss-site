@@ -1,13 +1,14 @@
 import React from "react";
 import { Header as JCSSHeader, Button } from "@jon-cundiff/jcss-components";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../store/actions/actionCreators";
+import { getGuestUser, logoutUser } from "../../store/actions/actionCreators";
 
 import "./Header.css";
 
 const Header = () => {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
+
     const leftChildren = [
         {
             inner: "Buttons",
@@ -17,14 +18,12 @@ const Header = () => {
 
     const themesList = {
         inner: "Themes",
-        className: "no-hover",
         itemChildren: [
             {
                 inner: (
                     <>
-                        <span>
-                            <i className="fas fa-plus mr-2"></i>Theme Builder
-                        </span>
+                        <i className="fas fa-plus mr-4"></i>
+                        <span>Theme Builder</span>
                     </>
                 ),
                 link: "/builder",
@@ -53,19 +52,35 @@ const Header = () => {
                       </Button>
                   ),
                   link: "/",
-                  className: "no-hover",
               },
           ]
         : [
               themesList,
               {
-                  inner: (
-                      <Button styleType="info" faIcon="fab fa-github">
-                          Login
-                      </Button>
-                  ),
-                  external: true,
-                  link: `${process.env.REACT_APP_BASE_URL}/auth/github`,
+                  inner: "Login",
+                  itemChildren: [
+                      {
+                          inner: (
+                              <>
+                                  <i className="fab fa-github mr-4"></i>
+                                  <span>Login With GitHub</span>
+                              </>
+                          ),
+                          external: true,
+                          link: `${process.env.REACT_APP_BASE_URL}/auth/github`,
+                      },
+                      {
+                          inner: (
+                              <div
+                                  onClick={() => dispatch(getGuestUser())}
+                                  className="pointer"
+                              >
+                                  <i className="fas fa-circle-user mr-4"></i>
+                                  <span>Guest Login</span>
+                              </div>
+                          ),
+                      },
+                  ],
               },
           ];
 
