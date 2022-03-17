@@ -1,0 +1,14 @@
+.component-list {
+    font-size: 1.5rem;
+}
+
+.component-list a,
+.component-list a:visited,
+.component-list a:active {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.component-list a:hover {
+    color: var(--color-primary-medium-light);
+}

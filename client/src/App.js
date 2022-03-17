@@ -14,6 +14,7 @@ import { resetSiteTheme } from "./store/actions/actionCreators";
 import ProtectedRoute from "./components/Common/ProtectedRoute";
 import ProfilePage from "./components/Profile/ProfilePage";
 import ThemesPage from "./components/Themes/ThemesPage";
+import GettingStartedPage from "./components/GettingStarted/GettingStartedPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -32,6 +33,10 @@ function App() {
                 <Route path="/button" element={<ButtonPage />} />
                 <Route path="/themes" element={<ThemesPage />} />
                 <Route path="/builder" element={<ThemeBuilderPage />} />
+                <Route
+                    path="docs/getting-started"
+                    element={<GettingStartedPage />}
+                />
                 <Route
                     path="/profile"
                     element={
