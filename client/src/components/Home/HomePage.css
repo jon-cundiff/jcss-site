@@ -1,0 +1,10 @@
+.hp-col {
+    font-size: 1.2rem;
+}
+
+@media screen and (min-width: 600px) {
+    .hp-col {
+        width: 60%;
+        font-size: 1.2rem;
+    }
+}

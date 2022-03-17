@@ -1,32 +1,32 @@
 import React from "react";
-import { Button, Row, Column } from "@jon-cundiff/jcss-components";
+import { Button, MobileRow, Column } from "@jon-cundiff/jcss-components";
+
+import "./HomePage.css";
+import jcssLogo from "./jcss-blue.svg";
 
 const HomePage = () => {
     return (
-        <Column className="px-5 mx-5">
-            <Row fill justify="between">
-                <Column>
-                    <Button
-                        styleType="secondary"
-                        onClick={() => new Window("/")}
-                    >
-                        Hi
-                    </Button>
-                    <Button styleType="info">Hi</Button>
-                    <Button styleType="danger">Hi</Button>
+        <Column className="px-5 mx-5 mt-5 pt-5">
+            <MobileRow fill justify="around" fgx={5} className="mb-5 pb-5">
+                <Column align="center">
+                    <img src={jcssLogo} alt="JCSS Logo" />
                 </Column>
-                <Column>
-                    <Button styleType="secondary">Hi</Button>
-                    <Button styleType="info">Hi</Button>
-                    <Button styleType="danger">Hi</Button>
+                <Column className="hp-col" justify="center">
+                    <h1>JCSS</h1>
+                    <h3>Customizable CSS Framework</h3>
+                    <p>
+                        Rapidly design mobile-first layouts with JCSS. This
+                        framework utilizes vanilla CSS (No Sass or other CSS
+                        Preprocessors) and is built around Flexbox and vanilla
+                        CSS Variables. The end result is easy to customize color
+                        themes without requiring a build process.
+                    </p>
                 </Column>
-                <Column>
-                    <Button styleType="secondary">Hi</Button>
-                    <Button styleType="info">Hi</Button>
-                    <Button styleType="danger">Hi</Button>
-                </Column>
-            </Row>
-            <Button>Hi</Button>
+            </MobileRow>
+            <Button styleType="secondary">Get Started</Button>
+            <p>
+                Framework: <b>v0.2.3</b> | Component Library: <b>v0.2.5</b>
+            </p>
         </Column>
     );
 };
