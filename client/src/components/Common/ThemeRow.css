@@ -11,7 +11,8 @@
     padding: 1rem;
 }
 
-:is(.theme-controls, .theme-actions[data-owner="owner"]) button {
+:is(.theme-controls, .theme-actions[data-owner="owner"], .theme-actions[data-user="none"])
+    button {
     width: 100%;
 }
 

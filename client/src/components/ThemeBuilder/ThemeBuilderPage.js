@@ -16,6 +16,7 @@ import { useEffect } from "react";
 
 const ThemeBuilderPage = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
     const themeBranch = useSelector((state) => state.theme);
     const [params] = useSearchParams();
     const themeId = params.get("id");
@@ -41,6 +42,16 @@ const ThemeBuilderPage = () => {
     const handleClearAlert = () => {
         dispatch(resetThemeAlert());
     };
+
+    const saveButton = user ? (
+        <Button styleType="info" onClick={handleThemeSave}>
+            {themeId ? "Update" : "Save"} Theme
+        </Button>
+    ) : (
+        <Button styleType="info" disabled>
+            Log in to save a theme!
+        </Button>
+    );
 
     useEffect(() => () => dispatch(resetThemeAlert()), []);
     return (
@@ -79,9 +90,7 @@ const ThemeBuilderPage = () => {
                     Reset Theme
                 </Button>
             )}
-            <Button styleType="info" onClick={handleThemeSave}>
-                {themeId ? "Update" : "Save"} Theme
-            </Button>
+            {saveButton}
         </Column>
     );
 };
