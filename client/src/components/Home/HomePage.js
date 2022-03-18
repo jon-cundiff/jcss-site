@@ -33,7 +33,7 @@ const HomePage = () => {
                 Get Started
             </Button>
             <p>
-                Framework: <b>v0.2.3</b> | Component Library: <b>v0.2.5</b>
+                Framework: <b>v0.2.4</b> | Component Library: <b>v0.2.6</b>
             </p>
         </Column>
     );

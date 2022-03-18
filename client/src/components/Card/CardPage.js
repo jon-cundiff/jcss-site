@@ -9,7 +9,7 @@ const CardPage = () => {
     return (
         <Column className="mx-5">
             <Card title="Card">
-                <MobileRow wrap className="mb-5">
+                <MobileRow wrap>
                     <Card styleType="primary" title="Primary" sub>
                         Hello World
                     </Card>
@@ -86,7 +86,7 @@ const CardPage = () => {
                         Danger Lighter No Title
                     </Card>
                 </MobileRow>
-                <Card styleType="info" title="Example Code">
+                <Card styleType="info" title="Example Code" className="mt-5">
                     <Column>
                         <Syntax codeString={exHtml} label="HTML" />
                         <Syntax codeString={exJsx} label="jcss-components" />
