@@ -15,7 +15,11 @@ const AlertPage = () => {
                     <Alert styleType="info" text="Info" showClose />
                     <Alert styleType="success" text="Success" showClose />
                     <Alert styleType="danger" text="Danger" showClose />
-                    <Card styleType="info" title="Code Samples">
+                    <Card
+                        styleType="info"
+                        title="Example Code"
+                        className="mt-5"
+                    >
                         <Column>
                             <Syntax codeString={exHtml} label="HTML" />
                             <Syntax

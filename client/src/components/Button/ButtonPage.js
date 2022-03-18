@@ -55,7 +55,7 @@ const ButtonPage = () => {
                         Success lighter Disabled
                     </Button>
                 </MobileRow>
-                <MobileRow className="mb-5">
+                <MobileRow>
                     <Button styleType="danger">Danger</Button>
                     <Button styleType="danger" disabled>
                         Danger Disabled
@@ -67,7 +67,7 @@ const ButtonPage = () => {
                         Danger Lighter Disabled
                     </Button>
                 </MobileRow>
-                <Card styleType="info" title="Sample Code">
+                <Card styleType="info" title="Example Code" className="mt-5">
                     <Column>
                         <Syntax codeString={ex1html} label="HTML" />
                         <Syntax codeString={ex1jsx} label="jcss-components" />

@@ -16,7 +16,7 @@ const DropdownPage = () => {
             <Card title="Dropdown">
                 <MobileRow
                     wrap
-                    className="pr-5 mr-5 mb-5"
+                    className="pr-5 mr-5"
                     align="center"
                     justify="start"
                 >
@@ -83,7 +83,11 @@ const DropdownPage = () => {
                         <p>Item 3</p>
                     </Dropdown>
                 </MobileRow>
-                <Card styleType="secondary" title="Code Samples">
+                <Card
+                    styleType="secondary"
+                    title="Example Code"
+                    className="mt-5"
+                >
                     <Column>
                         <Syntax codeString={exHtml} label="HTML" />
                         <Syntax codeString={exJsx} label="jcss-components" />
