@@ -9,7 +9,7 @@ const CardPage = () => {
     return (
         <Column className="mx-5">
             <Card title="Card">
-                <MobileRow wrap>
+                <MobileRow>
                     <Button>Primary</Button>
                     <Button disabled>Primary Disabled</Button>
                 </MobileRow>
