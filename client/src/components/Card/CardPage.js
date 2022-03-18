@@ -86,7 +86,7 @@ const CardPage = () => {
                         Danger Lighter No Title
                     </Card>
                 </MobileRow>
-                <Card styleType="info" title="Sample Code">
+                <Card styleType="info" title="Example Code">
                     <Column>
                         <Syntax codeString={exHtml} label="HTML" />
                         <Syntax codeString={exJsx} label="jcss-components" />

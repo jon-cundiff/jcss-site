@@ -83,7 +83,7 @@ const DropdownPage = () => {
                         <p>Item 3</p>
                     </Dropdown>
                 </MobileRow>
-                <Card styleType="secondary" title="Code Samples">
+                <Card styleType="secondary" title="Example Code">
                     <Column>
                         <Syntax codeString={exHtml} label="HTML" />
                         <Syntax codeString={exJsx} label="jcss-components" />
