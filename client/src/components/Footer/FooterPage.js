@@ -193,7 +193,7 @@ const FooterPage = () => {
                 </Column>
                 <Card
                     styleType="secondary"
-                    title="ExampleCode"
+                    title="Example Code"
                     className="mt-5"
                 >
                     <MobileRow>
