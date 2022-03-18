@@ -18,7 +18,7 @@ import { buildTheme } from "../../common/buildTheme";
 const ThemeRow = ({ theme, owner, onDelete, onError }) => {
     const user = useSelector((state) => state.auth.user);
     const [favoriteId, setFavoriteId] = useState(
-        user && theme.favorites.length > 1 ? theme.favorites[0].id : null
+        user && theme.favorites.length > 0 ? theme.favorites[0].id : null
     );
     const dispatch = useDispatch();
     const navigate = useNavigate();
