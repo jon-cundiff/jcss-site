@@ -21,6 +21,12 @@ const CardPage = () => {
                     >
                         Hello World
                     </Card>
+                    <Card styleType="primary" sub>
+                        Primary No Title
+                    </Card>
+                    <Card styleType="primary" lighter sub>
+                        Primary Lighter No Title
+                    </Card>
                     <Card styleType="secondary" title="Secondary" sub>
                         Hello World
                     </Card>
@@ -32,11 +38,23 @@ const CardPage = () => {
                     >
                         Hello World
                     </Card>
+                    <Card styleType="secondary" sub>
+                        Secondary No Title
+                    </Card>
+                    <Card styleType="secondary" lighter sub>
+                        Secondary Lighter No Title
+                    </Card>
                     <Card styleType="info" title="Info" sub>
                         Hello World
                     </Card>
                     <Card styleType="info" title="Info Lighter" lighter sub>
                         Hello World
+                    </Card>
+                    <Card styleType="info" sub>
+                        Info No Title
+                    </Card>
+                    <Card styleType="info" lighter sub>
+                        Info Lighter No Title
                     </Card>
                     <Card styleType="success" title="Success" sub>
                         Hello World
@@ -49,11 +67,23 @@ const CardPage = () => {
                     >
                         Hello World
                     </Card>
+                    <Card styleType="success" sub>
+                        Success No Title
+                    </Card>
+                    <Card styleType="success" lighter sub>
+                        Success Lighter No Title
+                    </Card>
                     <Card styleType="danger" title="Danger" sub>
                         Hello World
                     </Card>
                     <Card styleType="danger" title="Danger Lighter" lighter sub>
                         Hello World
+                    </Card>
+                    <Card styleType="danger" sub>
+                        Danger No Title
+                    </Card>
+                    <Card styleType="danger" lighter sub>
+                        Danger Lighter No Title
                     </Card>
                 </MobileRow>
                 <Card styleType="info" title="Sample Code">

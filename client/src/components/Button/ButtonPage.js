@@ -68,8 +68,10 @@ const ButtonPage = () => {
                     </Button>
                 </MobileRow>
                 <Card styleType="info" title="Sample Code">
-                    <Syntax codeString={ex1html} label="HTML" />
-                    <Syntax codeString={ex1jsx} label="jcss-components" />
+                    <Column>
+                        <Syntax codeString={ex1html} label="HTML" />
+                        <Syntax codeString={ex1jsx} label="jcss-components" />
+                    </Column>
                 </Card>
             </Card>
         </Column>

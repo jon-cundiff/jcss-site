@@ -1,22 +1,30 @@
 import React from "react";
-import { Button, Column, Card, MobileRow } from "@jon-cundiff/jcss-components";
+import { Column, Card, Alert } from "@jon-cundiff/jcss-components";
 import Syntax from "../Common/Syntax";
 
-// import ex1jsx from "./button.ex1.react.js";
-// import ex1html from "./button.ex1.html.js";
+import exJsx from "./Alert.ex.react.js";
+import exHtml from "./Alert.ex.html.js";
 
 const AlertPage = () => {
     return (
         <Column className="mx-5">
             <Card title="Alert">
-                <MobileRow>
-                    <Button>Primary</Button>
-                    <Button disabled>Primary Disabled</Button>
-                </MobileRow>
-                <MobileRow>
-                    {/* <Syntax codeString={ex1html} label="HTML" />
-                    <Syntax codeString={ex1jsx} label="jcss-components" /> */}
-                </MobileRow>
+                <Column>
+                    <Alert styleType="primary" text="Primary" showClose />
+                    <Alert styleType="secondary" text="Secondary" showClose />
+                    <Alert styleType="info" text="Info" showClose />
+                    <Alert styleType="success" text="Success" showClose />
+                    <Alert styleType="danger" text="Danger" showClose />
+                    <Card styleType="info" title="Code Samples">
+                        <Column>
+                            <Syntax codeString={exHtml} label="HTML" />
+                            <Syntax
+                                codeString={exJsx}
+                                label="jcss-components"
+                            />
+                        </Column>
+                    </Card>
+                </Column>
             </Card>
         </Column>
     );

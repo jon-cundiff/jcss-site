@@ -36,7 +36,7 @@ const Header = () => {
                 },
                 {
                     inner: "Dropdown",
-                    link: "/docs/dropdwon",
+                    link: "/docs/dropdown",
                 },
                 {
                     inner: "Card",
